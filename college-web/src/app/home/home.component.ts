@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
 
   collegeList: Array<any> = [];
 
+  //This is used to desplay value when the user opens to the home page
   search = {
     "distance": "100mi",
     "pageSize": 10,
