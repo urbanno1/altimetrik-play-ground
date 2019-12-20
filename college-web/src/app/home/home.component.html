@@ -1,0 +1,93 @@
+<div class="container-fluid">
+
+    <div class="form">
+
+        <form [formGroup]="searchForm">
+            <div class="container" style="float: right;">
+                <div class="row">
+                    <div class="col-sm">
+                        <div class="form-group">
+                            <input class="form-control" type="text" formControlName="distance"
+                                placeholder="distance. e.g: 100mi">
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <div class="form-group">
+                            <input class="form-control" type="text" formControlName="predominant"
+                                placeholder="predominant. eg: 2,3">
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <div class="form-group">
+                            <input class="form-control" type="number" formControlName="zip"
+                                placeholder="zip. e.g: 52557">
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <div class="form-group">
+                            <input class="form-control" type="number" formControlName="year"
+                                placeholder="year. e.g: 2017">
+                        </div>
+                    </div>
+
+                    <div class="col-sm">
+                        <div class="form-group"> 
+                            
+                            <button class="btn btn-success" (click)="OnSubmitForm()" type="submit">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+    <br>
+    <br>
+
+    <div class="form">
+        <div>
+            <h3>The List of College</h3>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">College Name</th>
+                        <th scope="col">College Sise</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let college of collegeList | paginate: { itemsPerPage: 5, currentPage: page };">
+                        <td>
+                            {{ college.id }}
+                        </td>
+                        <td> {{ college.name }}</td>
+                        <td> {{ college.size }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="float-right p-2" *ngIf="collegeList">
+                <small aria-label="Page navigation example float-right">
+                    <pagination-controls (pageChange)="page = $event"></pagination-controls>
+                </small>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div>
+        <div>
+            <h3>Map: </h3>
+        </div>
+
+        <div *ngIf="zipCode">
+                <iframe width="600" height="450" frameborder="0" style="border:0"
+                    [src]='sanitizer.bypassSecurityTrustResourceUrl(url)' allowfullscreen></iframe>
+            </div>
+
+    </div>
+
+
+</div>
